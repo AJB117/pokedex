@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-
-export interface Pokemon {
-  name: string;
-}
+import { PokemonService } from '../pokemon.service';
+import { Pokemon } from '../pokemon';
 
 @Component({
   selector: 'app-list',
@@ -14,17 +12,17 @@ export interface Pokemon {
 })
 export class ListComponent implements OnInit {
   defaultUrl = 'https://pokeapi.co/api/v2/pokemon/1';
+  pokemon$: Observable<Pokemon[]>;
   names = [];
   
   constructor(
     private http: HttpClient,
+    private pokemonService: PokemonService
   ) { }
 
-  getAllPokemon(): Observable<Pokemon> {
-    return this.http.get<Pokemon>(this.defaultUrl);
-  }
   ngOnInit() {
-    this.getAllPokemon()
+    this.pokemon$ = this.pokemonService.getAllPokemon();
+    this.pokemon$
       .subscribe(pkmn => {
         console.log(typeof(pkmn));
         console.log(pkmn);
