@@ -1,4 +1,6 @@
 <h2>List</h2>
-<li *ngFor="let pkmn of names">
-    {{ pkmn }}
-</li>
+<div fxLayout="column" fxLayoutGap="16px">
+    <li *ngFor="let pkmn of (pokemon$ | async).results">
+        {{ pkmn.name }}
+    </li>
+</div>

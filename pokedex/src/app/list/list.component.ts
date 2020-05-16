@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { PokemonService } from '../pokemon.service';
 import { Pokemon } from '../pokemon';
 
@@ -10,25 +10,27 @@ import { Pokemon } from '../pokemon';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
-  defaultUrl = 'https://pokeapi.co/api/v2/pokemon/1';
+
+export class ListComponent implements OnInit, OnDestroy {
   pokemon$: Observable<Pokemon[]>;
-  names = [];
-  
+
+  private readonly onDestroy = new Subject<void>();
+
   constructor(
-    private http: HttpClient,
     private pokemonService: PokemonService
   ) { }
 
-  ngOnInit() {
-    this.pokemon$ = this.pokemonService.getAllPokemon();
-    this.pokemon$
-      .subscribe(pkmn => {
-        console.log(typeof(pkmn));
-        console.log(pkmn);
-        this.names.push(pkmn.name);
-        console.log(this.names[0]);
-      });
+  ngOnDestroy(): void {
+    this.onDestroy.next();
   }
 
+  ngOnInit() {
+    this.pokemon$ = this.pokemonService.getAllPokemon();
+    // this.pokemon$
+    //   .pipe(takeUntil(this.onDestroy))
+    //   .subscribe(pkmn => {
+    //     console.log(pkmn.results);
+    //     this.names = pkmn.results;
+    //   });
+  }
 }
