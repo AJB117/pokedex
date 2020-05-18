@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component'; 
+import { CaughtListComponent } from './caught-list/caught-list.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
   { path: 'list', component: ListComponent },
+  { path: 'caught', component: CaughtListComponent},
 ];
 
 @NgModule({

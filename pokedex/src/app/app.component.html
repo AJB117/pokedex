@@ -1,6 +1,13 @@
-<h1>{{ title }}</h1>
+<mat-toolbar color="primary">
+    <a routerLink="/" class="home-link">
+      {{ title }}
+    </a>
+</mat-toolbar>
+
 <nav>
-  <a routerLink="/build">Build</a>
-  <a routerLink="/list">List</a>
+  <a routerLink="/caught">Caught</a>
+  <!-- <a routerLink="/build">Team</a> -->
+  <!-- <a routerLink="/list">Want</a> -->
 </nav>
+
 <router-outlet></router-outlet>

@@ -2,3 +2,26 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokerow {
+    display: block;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.number {
+    width: 200px;
+    text-align: right;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

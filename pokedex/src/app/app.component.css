@@ -19,3 +19,8 @@ nav a {
   nav a.active {
     color: #039be5;
   }
+
+  .home-link {
+    color: white;
+    text-decoration: none;
+  }

@@ -1,5 +1,5 @@
 export class Pokemon {
     name: string;
-    image: string;
-    results: any;
+    front_default: string;
+    results: any[];
 }

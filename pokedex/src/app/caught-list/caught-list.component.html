@@ -1,0 +1,24 @@
+<div fxLayout="row wrap"fxLayoutGap="16px" fxLayoutAlign="flex-start" class="main">
+    <ng-container *ngFor="let pkmn of caught">
+        
+        <mat-card fxFlex="0 1 calc(16.7% - 32px)" class="pokerow">
+            <mat-card-header>
+                <mat-card-title>
+                    {{ pkmn?.name | titlecase}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{ pkmn?.types[0]?.type?.name | titlecase }} {{ pkmn?.types[1]?.type?.name | titlecase }}
+                </mat-card-subtitle>
+                <p class="number">
+                    #{{ pkmn?.game_indices[0]?.game_index }}
+                </p>
+            </mat-card-header>
+            <img mat-card-image src="{{ pkmn?.sprites?.front_default }}" alt="front">
+            <mat-card-actions class="actions">
+                <button mat-raised-button>Remove</button>
+                <button mat-raised-button>Add to Team</button>
+                <button mat-raised-button>Stats</button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>
