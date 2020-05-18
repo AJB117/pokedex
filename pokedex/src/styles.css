@@ -25,3 +25,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center;
     justify-content: center;
 }
+
+h1 {
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 100px;
+}

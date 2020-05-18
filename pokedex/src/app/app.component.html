@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
     <a routerLink="/" class="home-link">
-      {{ title }}
+      <span>{{title}}</span>
     </a>
+    <nav>
+      <span class="mat-button" routerLink="/caught">Caught</span>
+      <span class="mat-button" routerLink="/build">Build</span>
+      <span class="mat-button" routerLink="/want">Want</span>
+    </nav>
 </mat-toolbar>
 
-<nav>
-  <a routerLink="/caught">Caught</a>
-  <!-- <a routerLink="/build">Team</a> -->
-  <!-- <a routerLink="/list">Want</a> -->
-</nav>
 
 <router-outlet></router-outlet>
