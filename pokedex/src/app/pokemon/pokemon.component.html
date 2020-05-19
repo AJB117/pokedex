@@ -1,0 +1,22 @@
+<mat-card fxFlex="0 1 calc(16.7% - 32px)" class="pokerow">
+    <mat-card-header>
+        <mat-card-title>
+            {{ pkmn?.name | titlecase}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ pkmn?.type1 | titlecase }} {{ pkmn?.type2 | titlecase }}
+        </mat-card-subtitle>
+        <p class="number">
+            #{{ pkmn?.number }}
+        </p>
+    </mat-card-header>
+    <ng-container *ngIf="!(pkmn)?.front_default"; else #img>
+        <mat-spinner></mat-spinner>
+    </ng-container>
+    <img #img mat-card-image src="{{ pkmn?.front_default }}" alt="front">
+    <mat-card-actions class="actions">
+        <button mat-raised-button (click)="addCaught(pkmn)">Add to Caught</button>
+        <button mat-raised-button>Add to Team</button>
+        <button mat-raised-button>Add to Want</button>
+    </mat-card-actions>
+</mat-card>

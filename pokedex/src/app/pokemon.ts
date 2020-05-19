@@ -1,5 +1,7 @@
 export class Pokemon {
     name: string;
     front_default: string;
-    results: any[];
+    type1: string;
+    type2: string;
+    number: number;
 }

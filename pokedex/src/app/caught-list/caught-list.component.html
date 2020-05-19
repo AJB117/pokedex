@@ -9,13 +9,13 @@
                     {{ pkmn?.name | titlecase}}
                 </mat-card-title>
                 <mat-card-subtitle>
-                    {{ pkmn?.types[0]?.type?.name | titlecase }} {{ pkmn?.types[1]?.type?.name | titlecase }}
+                    {{ pkmn?.type1 | titlecase }} {{ pkmn?.type2 | titlecase }}
                 </mat-card-subtitle>
                 <p class="number">
-                    #{{ pkmn?.game_indices[0]?.game_index }}
+                    #{{ pkmn?.number }}
                 </p>
             </mat-card-header>
-            <img mat-card-image src="{{ pkmn?.sprites?.front_default }}" alt="front">
+            <img mat-card-image src="{{ pkmn?.front_default }}" alt="front">
             <mat-card-actions class="actions">
                 <button mat-raised-button (click)="remove(pkmn)">Remove</button>
                 <button mat-raised-button>Add to Team</button>
