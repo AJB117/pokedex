@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pokemon',
@@ -12,19 +13,27 @@ export class PokemonComponent implements OnInit {
   @Input('pkmn') pkmn: Pokemon;
   @Input('barType') barType: string;
 
+  constructor(private pokemonService: PokemonService,
+              private router: Router,
+              private _snackBar: MatSnackBar
+    ) {
+      
+  }
   addCaught(pkmn: Pokemon) {
-    if (localStorage.getItem("caught")) {
-        let caught = JSON.parse(localStorage.getItem("caught"));
-        if (!localStorage.getItem("caught").includes(JSON.stringify(pkmn))) {
-          caught.push(pkmn);
-          localStorage.setItem("caught", JSON.stringify(caught));
-          this.pokemonService.updateNumCaught();
-        }
-    } else {
-      localStorage.setItem("caught", JSON.stringify([]));
-      let caught = JSON.parse(localStorage.getItem("caught"));
+    let caught = JSON.parse(localStorage.getItem("caught"));
+    if (!localStorage.getItem("caught").includes(JSON.stringify(pkmn))) {
       caught.push(pkmn);
       localStorage.setItem("caught", JSON.stringify(caught));
+      this.pokemonService.updateNumCaught();
+      this._snackBar.open(`Caught ${pkmn.name}`, "", {
+        duration: 2000,
+        panelClass: 'center'
+      });
+    } else {
+      this._snackBar.open(`${pkmn.name} already caught`, "", {
+        duration: 2000,
+        panelClass: 'center',
+      });
     }
   }
   
@@ -39,6 +48,10 @@ export class PokemonComponent implements OnInit {
     localStorage.setItem("caught", JSON.stringify(caught))
     this.router.navigate(['/caught']);
     this.pokemonService.updateNumCaught();
+    this._snackBar.open(`Removed ${pkmn.name}`, "", {
+      duration: 2000,
+      panelClass: 'center'
+    });
   }
 
   onUpdatePokemon(changes: SimpleChanges, barType: string) {
@@ -54,11 +67,6 @@ export class PokemonComponent implements OnInit {
     }
   }
 
-  constructor(private pokemonService: PokemonService,
-              private router: Router
-    ) {
-      
-  }
   
   ngOnChanges(changes: SimpleChanges): void {
     if (this.pkmn) {
