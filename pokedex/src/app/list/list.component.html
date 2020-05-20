@@ -1,7 +1,8 @@
 <div fxLayout="row wrap"fxLayoutGap="16px" fxLayoutAlign="flex-start" class="main">
     <ng-container *ngFor="let pkmn of (pokemon$ | async)">
         <app-pokemon
-            [pkmn]="pkmn | async">
+            [pkmn]="pkmn | async"
+            [barType]="barType">
         </app-pokemon>
     </ng-container>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pokemon } from '../pokemon';
+import { PokemonService } from '../pokemon.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -12,6 +13,7 @@ export class CaughtListComponent implements OnInit {
   caught: string[];
   fillerText: string;
   sub: any;
+  barType: string;
 
   remove(pkmn: string) {
     let caught: any = JSON.parse(localStorage.getItem("caught"));
@@ -23,9 +25,11 @@ export class CaughtListComponent implements OnInit {
     
     localStorage.setItem("caught", JSON.stringify(caught))
     this.router.navigate(['/caught']);
+    this.pokemonService.updateNumCaught();
   }
 
-  constructor(private router: Router, private route: ActivatedRoute) { 
+  constructor(private router: Router, private route: ActivatedRoute, private pokemonService: PokemonService) { 
+    this.barType = "caught";
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.sub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

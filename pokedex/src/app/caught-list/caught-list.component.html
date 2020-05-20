@@ -3,24 +3,9 @@
         <h1>{{fillerText}}</h1>
     </ng-container>
     <ng-container *ngFor="let pkmn of caught">
-        <mat-card fxFlex="0 1 calc(16.7% - 32px)" class="pokerow">
-            <mat-card-header>
-                <mat-card-title>
-                    {{ pkmn?.name | titlecase}}
-                </mat-card-title>
-                <mat-card-subtitle>
-                    {{ pkmn?.type1 | titlecase }} {{ pkmn?.type2 | titlecase }}
-                </mat-card-subtitle>
-                <p class="number">
-                    #{{ pkmn?.number }}
-                </p>
-            </mat-card-header>
-            <img mat-card-image src="{{ pkmn?.front_default }}" alt="front">
-            <mat-card-actions class="actions">
-                <button mat-raised-button (click)="remove(pkmn)">Remove</button>
-                <button mat-raised-button>Add to Team</button>
-                <button mat-raised-button>Stats</button>
-            </mat-card-actions>
-        </mat-card>
+        <app-pokemon
+            [pkmn] = "pkmn"
+            [barType] = "barType">
+        </app-pokemon>
     </ng-container>
 </div>

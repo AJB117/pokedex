@@ -1,7 +1,7 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges} from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pokemon } from '../pokemon';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
   selector: 'app-pokemon',
@@ -10,7 +10,7 @@ import { Pokemon } from '../pokemon';
 })
 export class PokemonComponent implements OnInit {
   @Input('pkmn') pkmn: Pokemon;
-  private readonly onDestroy = new Subject<void>();
+  @Input('barType') barType: string;
 
   addCaught(pkmn: Pokemon) {
     if (localStorage.getItem("caught")) {
@@ -18,6 +18,7 @@ export class PokemonComponent implements OnInit {
         if (!localStorage.getItem("caught").includes(JSON.stringify(pkmn))) {
           caught.push(pkmn);
           localStorage.setItem("caught", JSON.stringify(caught));
+          this.pokemonService.updateNumCaught();
         }
     } else {
       localStorage.setItem("caught", JSON.stringify([]));
@@ -26,17 +27,22 @@ export class PokemonComponent implements OnInit {
       localStorage.setItem("caught", JSON.stringify(caught));
     }
   }
+  
+  remove(pkmn: Pokemon) {
+    let caught: any = JSON.parse(localStorage.getItem("caught"));
+    let name: string = pkmn['name'];
+
+    caught = caught.filter(c => {
+      if (c['name'] !== name) return c;
+    })
     
-  ngOnDestroy(): void {
-    this.onDestroy.next();
-    console.log(this.pkmn);
+    localStorage.setItem("caught", JSON.stringify(caught))
+    this.router.navigate(['/caught']);
+    this.pokemonService.updateNumCaught();
   }
 
-  constructor() { 
-  }
-  
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.pkmn) {
+  onUpdatePokemon(changes: SimpleChanges, barType: string) {
+    if (barType === 'list') {
       let p: Pokemon = new Pokemon();
       let copyP: Object = changes['pkmn'].currentValue;
       p.name = copyP['name'];
@@ -44,8 +50,19 @@ export class PokemonComponent implements OnInit {
       p.type1 = copyP['types'][0]['type']['name'];
       p.type2 = copyP['types'].length > 1 ? copyP['types'][1]['type']['name'] : '';
       p.number = copyP['id'];
-      console.log(p);
       this.pkmn = p;
+    }
+  }
+
+  constructor(private pokemonService: PokemonService,
+              private router: Router
+    ) {
+      
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.pkmn) {
+      this.onUpdatePokemon(changes, this.barType);
     }
   }
 

@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component} from '@angular/core';
+import { PokemonService } from './pokemon.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pokedex';
+  numCaught: number;
+
+  constructor(public pokemonService: PokemonService) {
+  }
 }

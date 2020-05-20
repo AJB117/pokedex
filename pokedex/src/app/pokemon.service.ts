@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from, concat } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Pokemon } from './pokemon';
 
 @Injectable({
@@ -9,14 +8,23 @@ import { Pokemon } from './pokemon';
 })
 export class PokemonService {
   baseUrl = 'https://pokeapi.co/api/v2/';
+  caught = new BehaviorSubject(0);
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+    this.updateNumCaught();
+  }
+
+  updateNumCaught() {
+    this.caught.next(JSON.parse(localStorage.getItem("caught")).length);
+  }
+
+  getNumCaught() {
+    return this.caught;
+  }
 
   getPokemon(url: string): Observable<Pokemon[]> {
-    let pokemon: Observable<Pokemon[]> = new Observable<Pokemon[]>();
-    
     return this.http.get<Pokemon[]>(url);
   }
 
