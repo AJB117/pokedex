@@ -1,6 +1,6 @@
-<div fxLayout="row wrap"fxLayoutGap="16px" fxLayoutAlign="flex-start" class="main">
+<div fxLayout="row wrap"fxLayoutGap="16px" fxLayoutAlign="center" class="main">
     <ng-container *ngIf="fillerText">
-        <h1>{{fillerText}}</h1>
+        <h1 class="filler">{{fillerText}}</h1>
     </ng-container>
     <ng-container *ngFor="let pkmn of caught">
         <app-pokemon
