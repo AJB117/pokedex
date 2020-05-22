@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PokemonDialogComponent } from './pokemon-dialog.component';
+import { PokemonDialogComponent } from './pokemon-stats.component';
 
 describe('PokemonDialogComponent', () => {
   let component: PokemonDialogComponent;

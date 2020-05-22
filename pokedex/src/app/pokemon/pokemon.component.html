@@ -17,7 +17,7 @@
     <mat-card-actions class="actions">
         <button mat-raised-button (click)="addCaught(pkmn)" *ngIf="barType === 'list'">Add to Caught</button>
         <button mat-raised-button (click)="remove(pkmn)" *ngIf="barType === 'caught'">Remove</button>
-        <button mat-raised-button>Add to Team</button>
-        <button mat-raised-button>See Stats</button>
+        <button mat-raised-button (click)="addTeam(pkmn)">Add to Team</button>
+        <button mat-raised-button (click)="showStats(pkmn)">See Stats</button>
     </mat-card-actions>
 </mat-card>

@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-caught-list',
@@ -28,7 +28,7 @@ export class CaughtListComponent implements OnInit {
     this.pokemonService.updateNumCaught();
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private pokemonService: PokemonService) { 
+  constructor(private router: Router, private pokemonService: PokemonService) { 
     this.barType = "caught";
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.sub = this.router.events.subscribe((event) => {

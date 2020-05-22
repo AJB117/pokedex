@@ -2,10 +2,11 @@
     <ng-container *ngIf="fillerText">
         <h1 class="filler">{{fillerText}}</h1>
     </ng-container>
-    <ng-container *ngFor="let pkmn of caught">
+    <!-- <ng-container> -->
         <app-pokemon
+            *ngFor="let pkmn of caught"
             [pkmn] = "pkmn"
             [barType] = "barType">
         </app-pokemon>
-    </ng-container>
+    <!-- </ng-container> -->
 </div>

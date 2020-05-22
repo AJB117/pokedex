@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { PokemonService } from './pokemon.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 // import { PokemonDialogComponent } from './pokemon-dialog/pokemon-dialog.component';
@@ -8,11 +8,15 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Pokedex';
-  numCaught: number;
+  numCaught: any;
 
-  constructor(public pokemonService: PokemonService
+  constructor(private pokemonService: PokemonService
               ) {
+  }
+
+  ngOnInit() {
+    this.numCaught = this.pokemonService.getNumCaught();
   }
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { PokemonDialogComponent } from './pokemon-stats/pokemon-stats.component';
 
 @Component({
   selector: 'app-pokemon',
@@ -12,10 +14,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PokemonComponent implements OnInit {
   @Input('pkmn') pkmn: Pokemon;
   @Input('barType') barType: string;
+  @Output('pkmnCaught') pkmnCaught  = new EventEmitter;
 
   constructor(private pokemonService: PokemonService,
               private router: Router,
-              private _snackBar: MatSnackBar
+              private _snackBar: MatSnackBar,
+              private dialog: MatDialog
     ) {
       
   }
@@ -51,6 +55,22 @@ export class PokemonComponent implements OnInit {
     this._snackBar.open(`Removed ${pkmn.name}`, "", {
       duration: 2000,
       panelClass: 'center'
+    });
+  }
+
+  addTeam(pkmn: Pokemon) {
+
+  }
+
+  showStats(pkmn: Pokemon) {
+    const dialogRef = this.dialog.open(PokemonDialogComponent, {
+      width: '500px',
+      data: pkmn,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 

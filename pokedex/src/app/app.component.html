@@ -3,8 +3,8 @@
       <span>{{title}}</span>
     </a>
     <nav>
-      <span class="mat-button" routerLink="/caught">Caught {{ pokemonService.getNumCaught() | async}}</span>
-      <span class="mat-button" routerLink="/build">Build</span>
+      <span class="mat-button" routerLink="/caught">Caught {{ numCaught | async}}</span>
+      <span class="mat-button" routerLink="/teams">Teams</span>
     </nav>
 </mat-toolbar>
 <router-outlet></router-outlet>
