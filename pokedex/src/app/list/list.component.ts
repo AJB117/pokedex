@@ -26,5 +26,5 @@ export class ListComponent implements OnInit {
         map(p => p['results'].map(p => p['url'])),
         map(p => p.map(p => this.pokemonService.getPokemon(p))),
       );
-  }
+    }
 }

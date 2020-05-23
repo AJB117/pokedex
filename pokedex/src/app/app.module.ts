@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PokemonService } from './pokemon.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [PokemonService],
   bootstrap: [AppComponent],
   entryComponents: [PokemonDialogComponent]
 })

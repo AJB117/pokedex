@@ -10,23 +10,10 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class CaughtListComponent implements OnInit {
 
-  caught: string[];
+  caught: Pokemon[] = [];
   fillerText: string;
   sub: any;
   barType: string;
-
-  remove(pkmn: string) {
-    let caught: any = JSON.parse(localStorage.getItem("caught"));
-    let name: string = pkmn['name'];
-
-    caught = caught.filter(c => {
-      if (c['name'] !== name) return c;
-    })
-    
-    localStorage.setItem("caught", JSON.stringify(caught))
-    this.router.navigate(['/caught']);
-    this.pokemonService.updateNumCaught();
-  }
 
   constructor(private router: Router, private pokemonService: PokemonService) { 
     this.barType = "caught";
@@ -43,9 +30,10 @@ export class CaughtListComponent implements OnInit {
       this.sub.unsubscribe();
     }
   }
+
   ngOnInit(): void {
-    this.caught = JSON.parse(localStorage.getItem("caught"));
-    if (!this.caught.length) {
+    this.caught = this.pokemonService.getCaught();
+    if (!this.caught || !this.caught.length) {
       this.fillerText = "Add Pokemon you've caught";
     }
   }

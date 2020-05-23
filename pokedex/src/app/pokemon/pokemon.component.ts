@@ -14,7 +14,6 @@ import { PokemonDialogComponent } from './pokemon-stats/pokemon-stats.component'
 export class PokemonComponent implements OnInit {
   @Input('pkmn') pkmn: Pokemon;
   @Input('barType') barType: string;
-  @Output('pkmnCaught') pkmnCaught  = new EventEmitter;
 
   constructor(private pokemonService: PokemonService,
               private router: Router,
@@ -23,12 +22,9 @@ export class PokemonComponent implements OnInit {
     ) {
       
   }
+
   addCaught(pkmn: Pokemon) {
-    let caught = JSON.parse(localStorage.getItem("caught"));
-    if (!localStorage.getItem("caught").includes(JSON.stringify(pkmn))) {
-      caught.push(pkmn);
-      localStorage.setItem("caught", JSON.stringify(caught));
-      this.pokemonService.updateNumCaught();
+    if (this.pokemonService.addCaught(pkmn)) {
       this._snackBar.open(`Caught ${pkmn.name}`, "", {
         duration: 2000,
         panelClass: 'center'
@@ -36,22 +32,14 @@ export class PokemonComponent implements OnInit {
     } else {
       this._snackBar.open(`${pkmn.name} already caught`, "", {
         duration: 2000,
-        panelClass: 'center',
+        panelClass: 'center'
       });
     }
   }
   
   remove(pkmn: Pokemon) {
-    let caught: any = JSON.parse(localStorage.getItem("caught"));
-    let name: string = pkmn['name'];
-
-    caught = caught.filter(c => {
-      if (c['name'] !== name) return c;
-    })
-    
-    localStorage.setItem("caught", JSON.stringify(caught))
+    this.pokemonService.remove(pkmn);
     this.router.navigate(['/caught']);
-    this.pokemonService.updateNumCaught();
     this._snackBar.open(`Removed ${pkmn.name}`, "", {
       duration: 2000,
       panelClass: 'center'
