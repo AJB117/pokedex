@@ -20,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PokemonService } from './pokemon.service';
+import { PokemonResolver } from './pokemon/pokemon-resolver.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { PokemonService } from './pokemon.service';
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [PokemonService],
+  providers: [PokemonService, PokemonResolver],
   bootstrap: [AppComponent],
   entryComponents: [PokemonDialogComponent]
 })

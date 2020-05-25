@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PokemonService } from '../pokemon.service';
 import { Pokemon } from '../pokemon';
+import { ActivatedRoute, Data } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -10,21 +11,31 @@ import { Pokemon } from '../pokemon';
   styleUrls: ['./list.component.css']
 })
 
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   pokemon$: Observable<Pokemon[]>;
+  subscriptions: Subscription[] = [];
   barType: string;
 
   constructor(
     private pokemonService: PokemonService,
-    ) {
+    private route: ActivatedRoute) {
       this.barType = "list"
     }
     
     ngOnInit() {
-      this.pokemon$ = this.pokemonService.getAllPokemon().pipe(
-        catchError(err => of([])),
-        map(p => p['results'].map(p => p['url'])),
-        map(p => p.map(p => this.pokemonService.getPokemon(p))),
-      );
+      this.subscriptions.push(this.route.data
+        .subscribe(
+          (data) => {
+            console.log(data['pokemon']);
+            this.pokemon$ = (data['pokemon']);
+          }
+        ));
+    }
+
+    ngOnDestroy() {
+      this.subscriptions.map(sub => {
+        console.log('Unsubbed!');
+        sub.unsubscribe();
+      });
     }
 }

@@ -1,5 +1,5 @@
 <div fxLayout="row wrap"fxLayoutGap="16px" fxLayoutAlign="center" class="main">
-    <ng-container *ngFor="let pkmn of (pokemon$ | async)">
+    <ng-container *ngFor="let pkmn of (pokemon$)">
         <app-pokemon
             [pkmn]="pkmn | async"
             [barType]="barType">
