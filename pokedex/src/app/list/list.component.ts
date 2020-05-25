@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PokemonService } from '../pokemon.service';
 import { Pokemon } from '../pokemon';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,7 +16,6 @@ export class ListComponent implements OnInit, OnDestroy {
   barType: string;
 
   constructor(
-    private pokemonService: PokemonService,
     private route: ActivatedRoute) {
       this.barType = "list";
     }
@@ -25,7 +23,7 @@ export class ListComponent implements OnInit, OnDestroy {
     ngOnInit() {
       this.subscriptions.push(this.route.data
         .subscribe(
-          (data) => {
+          (data: Data) => {
             this.pokemon$ = (data['pokemon']);
           }
         ));
