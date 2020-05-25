@@ -10,9 +10,9 @@
             #{{ pkmn?.number }}
         </p>
     </mat-card-header>
-    <ng-container *ngIf="!(pkmn)?.front_default"; else #img>
+    <!-- <ng-container *ngIf="!(pkmn)?.front_default"; else #img>
         <mat-spinner></mat-spinner>
-    </ng-container>
+    </ng-container> -->
     <img #img mat-card-image src="{{ pkmn?.front_default }}" alt="front">
     <mat-card-actions class="actions">
         <button mat-raised-button (click)="addCaught(pkmn)" *ngIf="barType === 'list'">Add to Caught</button>
