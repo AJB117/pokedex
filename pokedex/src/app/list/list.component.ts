@@ -37,13 +37,4 @@ export class ListComponent implements OnInit, OnDestroy {
         sub.unsubscribe();
       });
     }
-    
-    clickme() {
-      console.log(this.pokemon$);
-      this.pokemon$.subscribe(
-        (p) => {
-          console.log(p);
-        }
-      );
-    }
 }
