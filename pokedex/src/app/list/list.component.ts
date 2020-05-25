@@ -19,14 +19,13 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private pokemonService: PokemonService,
     private route: ActivatedRoute) {
-      this.barType = "list"
+      this.barType = "list";
     }
     
     ngOnInit() {
       this.subscriptions.push(this.route.data
         .subscribe(
           (data) => {
-            console.log(data['pokemon']);
             this.pokemon$ = (data['pokemon']);
           }
         ));
@@ -37,5 +36,14 @@ export class ListComponent implements OnInit, OnDestroy {
         console.log('Unsubbed!');
         sub.unsubscribe();
       });
+    }
+    
+    clickme() {
+      console.log(this.pokemon$);
+      this.pokemon$.subscribe(
+        (p) => {
+          console.log(p);
+        }
+      );
     }
 }
