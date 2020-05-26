@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Pokemon } from './pokemon';
 import { EventEmitter } from '@angular/core';
@@ -8,8 +8,7 @@ import { EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class PokemonService {
-  baseUrl = 'https://pokeapi.co/api/v2/';
-  caughtChanged = new EventEmitter<Pokemon[]>();
+  baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
   caught: Pokemon[] = localStorage.getItem("caught") === null ? [] : JSON.parse(localStorage.getItem("caught"));
   numCaught = new BehaviorSubject(this.caught.length);
 
@@ -30,7 +29,6 @@ export class PokemonService {
     if (!localStorage.getItem("caught").includes(JSON.stringify(pkmn))) {
       this.caught.push(pkmn);
       localStorage.setItem("caught", JSON.stringify(this.caught));
-      this.caughtChanged.emit(this.caught.slice());
       this.numCaught.next(this.caught.length);
       return true;
     } else return false;
@@ -54,7 +52,7 @@ export class PokemonService {
   }
 
   getAllPokemon(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.baseUrl + 'pokemon?limit=150');
+    return this.http.get<Pokemon[]>(this.baseUrl, { params: {'limit': '150'}});
   }
 
 }

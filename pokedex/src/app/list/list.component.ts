@@ -24,14 +24,13 @@ export class ListComponent implements OnInit, OnDestroy {
       this.subscriptions.push(this.route.data
         .subscribe(
           (data: Data) => {
-            this.pokemon$ = (data['pokemon']);
+              this.pokemon$ = data['pokemon'];
           }
         ));
     }
 
     ngOnDestroy() {
       this.subscriptions.map(sub => {
-        console.log('Unsubbed!');
         sub.unsubscribe();
       });
     }

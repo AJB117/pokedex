@@ -15,6 +15,8 @@ export class PokemonComponent implements OnInit {
   @Input('pkmn') pkmn: Pokemon;
   @Input('barType') barType: string;
 
+  loaded: boolean;
+
   constructor(private pokemonService: PokemonService,
               private router: Router,
               private _snackBar: MatSnackBar,
@@ -83,6 +85,9 @@ export class PokemonComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.pkmn) {
+      this.loaded = true;
+    }
   }
 
 }

@@ -1,8 +1,13 @@
 <div fxLayout="row wrap"fxLayoutGap="16px" fxLayoutAlign="center" class="main">
-    <ng-container *ngFor="let pkmn of (pokemon$ | async)">
-        <app-pokemon
-            [pkmn]="pkmn"
-            [barType]="barType">
-        </app-pokemon>
+    <ng-container *ngIf="pokemon$; else loading">
+        <ng-container *ngFor="let pkmn of (pokemon$ | async)">
+            <app-pokemon
+                [pkmn]="pkmn"
+                [barType]="barType">
+            </app-pokemon>
+        </ng-container>
     </ng-container>
+    <ng-template #loading>
+        <mat-spinner></mat-spinner>
+    </ng-template>
 </div>
