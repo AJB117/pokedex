@@ -1,10 +1,2 @@
-<mat-toolbar color="primary" class="toolbar">
-    <a routerLink="/" class="home-link">
-      <span>{{title}}</span>
-    </a>
-    <nav>
-      <span class="mat-button" routerLink="/caught">Caught {{ numCaught | async}}</span>
-      <span class="mat-button" routerLink="/teams">Teams</span>
-    </nav>
-</mat-toolbar>
+<app-nav [title]="title"></app-nav>
 <router-outlet></router-outlet>

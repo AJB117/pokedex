@@ -3,13 +3,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.toolbar {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    z-index: 1000;
-}
-
 .main {
     margin-top: 50px;
 }
@@ -23,7 +16,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: right;
 }
 
-
+.toolbar {
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
 
 .center > .mat-simple-snackbar {
     justify-content: center;

@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PokemonService } from './pokemon.service';
 import { PokemonResolver } from './pokemon/pokemon-resolver.service';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PokemonResolver } from './pokemon/pokemon-resolver.service';
     ListComponent,
     FilterPipe,
     CaughtListComponent,
-    PokemonComponent
+    PokemonComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
