@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Pokemon } from '../../pokemon';
+import { Pokemon } from '../pokemon';
 
 @Component({
   templateUrl: './pokemon-stats.component.html',

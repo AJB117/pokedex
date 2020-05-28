@@ -36,3 +36,7 @@ nav a {
   .filler-space {
       flex: 100 1 auto;
   }
+
+  .toolbar-action {
+      cursor: pointer;
+  }

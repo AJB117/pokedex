@@ -2,10 +2,15 @@
     <ng-container *ngIf="fillerText">
         <h1 class="filler">{{fillerText}}</h1>
     </ng-container>
-    <ng-container *ngFor="let pkmn of caught">
-        <app-pokemon
-            [pkmn] = "pkmn"
-            [barType] = "barType">
-        </app-pokemon>
+    <ng-container *ngIf="caught; else loading">
+        <ng-container *ngFor="let pkmn of caught">
+            <app-pokemon
+                [pkmn] = "pkmn"
+                [barType] = "barType">
+            </app-pokemon>
+        </ng-container>
     </ng-container>
+    <ng-template #loading>
+        <mat-spinner></mat-spinner>
+    </ng-template>
 </div>

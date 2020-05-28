@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from '../pokemon/pokemon.service';
 
 @Component({
   selector: 'app-nav',

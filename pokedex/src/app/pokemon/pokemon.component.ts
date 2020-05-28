@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { Pokemon } from '../pokemon';
-import { PokemonService } from '../pokemon.service';
+import { Pokemon } from './pokemon';
+import { PokemonService } from './pokemon.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { PokemonDialogComponent } from './pokemon-stats/pokemon-stats.component';
+import { AddTeamsComponent } from '../teams/add-teams/add-teams.component';
 
 @Component({
   selector: 'app-pokemon',
@@ -25,38 +26,47 @@ export class PokemonComponent implements OnInit {
       
   }
 
-  addCaught(pkmn: Pokemon) {
-    if (this.pokemonService.addCaught(pkmn)) {
-      this._snackBar.open(`Caught ${pkmn.name}`, "", {
+  addCaught() {
+    if (this.pokemonService.addCaught(this.pkmn)) {
+      this._snackBar.open(`Caught ${this.pkmn.name}`, "", {
         duration: 2000,
         panelClass: 'center'
       });
     } else {
-      this._snackBar.open(`${pkmn.name} already caught`, "", {
+      this._snackBar.open(`Already caught`, "", {
         duration: 2000,
         panelClass: 'center'
       });
     }
   }
   
-  remove(pkmn: Pokemon) {
-    this.pokemonService.remove(pkmn);
+  remove() {
+    this.pokemonService.remove(this.pkmn);
     this.router.navigate(['/caught']);
-    this._snackBar.open(`Removed ${pkmn.name}`, "", {
+    this._snackBar.open(`Removed ${this.pkmn.name}`, "", {
       duration: 2000,
       panelClass: 'center'
     });
   }
 
-  addTeam(pkmn: Pokemon) {
-
+  addTeam() {
+    if (this.pokemonService.getTeams().length) {
+      console.log(this.pokemonService.getTeams());
+      // ...
+    } else {
+      const dialogRef = this.dialog.open(AddTeamsComponent, {
+        width: '500px',
+        height: '500px',
+        disableClose: false
+      });
+    }
   }
 
-  showStats(pkmn: Pokemon) {
+  showStats() {
     const dialogRef = this.dialog.open(PokemonDialogComponent, {
       width: '500px',
-      data: pkmn,
-      disableClose: true
+      data: this.pkmn,
+      disableClose: false
     });
 
     dialogRef.afterClosed().subscribe(result => {

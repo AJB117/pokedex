@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,8 +9,13 @@ import { ListComponent } from './list/list.component';
 import { CaughtListComponent } from './caught-list/caught-list.component';
 import { PokemonComponent } from './pokemon/pokemon.component';
 import { PokemonDialogComponent } from './pokemon/pokemon-stats/pokemon-stats.component';
+import { TeamsComponent } from './teams/teams.component';
+import { NavComponent } from './nav/nav.component';
+import { AddTeamsComponent } from './teams/add-teams/add-teams.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PokemonService } from './pokemon/pokemon.service';
+import { PokemonResolver } from './pokemon/pokemon-resolver.service';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -19,9 +24,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PokemonService } from './pokemon.service';
-import { PokemonResolver } from './pokemon/pokemon-resolver.service';
-import { NavComponent } from './nav/nav.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { NavComponent } from './nav/nav.component';
     FilterPipe,
     CaughtListComponent,
     PokemonComponent,
-    NavComponent
+    NavComponent,
+    TeamsComponent,
+    AddTeamsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,10 +49,13 @@ import { NavComponent } from './nav/nav.component';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [PokemonService, PokemonResolver],
   bootstrap: [AppComponent],
-  entryComponents: [PokemonDialogComponent]
+  entryComponents: [PokemonDialogComponent, AddTeamsComponent]
 })
 export class AppModule { }

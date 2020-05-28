@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="toolbar">
-    <span routerLink="/">{{title}}</span>
+    <span routerLink="/" class="toolbar-action">{{ title }}</span>
     <span class="filler"></span>
-    <span routerLink="/caught">Caught {{ numCaught | async}}</span>
+    <span routerLink="/caught" class="toolbar-action">Caught {{ numCaught | async}}</span>
     <span class="filler"></span>
-    <span routerLink="/teams">Teams</span>
+    <span routerLink="/teams" class="toolbar-action">Teams</span>
     <span class="filler-space"></span>
 </mat-toolbar>

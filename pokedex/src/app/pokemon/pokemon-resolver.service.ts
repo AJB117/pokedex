@@ -1,8 +1,8 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Pokemon } from '../pokemon';
+import { Pokemon } from './pokemon';
 import { combineLatest, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from './pokemon.service';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 
@@ -13,7 +13,6 @@ export class PokemonResolver implements Resolve<Pokemon[]> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
         let pkmn = (this.pokemonService.getAllPokemon().pipe(
             catchError(err => throwError(err)),
-            tap(p => {console.log(p);}),
             map(p => p['results'].map(p => p['url'])),
             map(p => combineLatest(p.map(p => this.pokemonService.getPokemon(p)))),
         ));
