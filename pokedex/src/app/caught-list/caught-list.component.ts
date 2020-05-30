@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pokemon } from '../pokemon/pokemon';
+import { Pokemon } from '../pokemon/pokemon.model';
 import { PokemonService } from '../pokemon/pokemon.service';
 import { Router, NavigationEnd } from '@angular/router';
 

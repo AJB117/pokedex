@@ -26,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NewTeamComponent } from './teams/new-team/new-team.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatInputModule } from '@angular/material/input';
     PokemonComponent,
     NavComponent,
     TeamsComponent,
-    AddTeamsComponent
+    AddTeamsComponent,
+    NewTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,6 @@ import { MatInputModule } from '@angular/material/input';
   ],
   providers: [PokemonService, PokemonResolver],
   bootstrap: [AppComponent],
-  entryComponents: [PokemonDialogComponent, AddTeamsComponent]
+  entryComponents: [PokemonDialogComponent, AddTeamsComponent, NewTeamComponent]
 })
 export class AppModule { }

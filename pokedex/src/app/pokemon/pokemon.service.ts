@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Pokemon } from './pokemon';
+import { Pokemon } from './pokemon.model';
+import { Team } from '../teams/team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,9 @@ import { Pokemon } from './pokemon';
 export class PokemonService {
   private url = 'https://pokeapi.co/api/v2/pokemon/';
   private caught: Pokemon[] = localStorage.getItem("caught") === null ? [] : JSON.parse(localStorage.getItem("caught"));
-  private teams: Pokemon[][] = [];
+  private teams: Team[] = [];
   private numCaught = new BehaviorSubject(this.caught.length);
+  private numTeams = new BehaviorSubject(this.teams.length);
 
   constructor(
     private http: HttpClient,
@@ -20,6 +22,13 @@ export class PokemonService {
   
   getTeams() {
     return this.teams;
+  }
+
+  addTeam(team: Team) {
+    console.log('before: ', this.teams);
+    this.teams.push(team);
+    console.log('after: ', this.teams);
+    this.numTeams.next(this.teams.length);
   }
 
   getCaught() {
@@ -49,6 +58,10 @@ export class PokemonService {
 
   getNumCaught(): BehaviorSubject<number> {
     return this.numCaught;
+  }
+
+  getNumTeams(): BehaviorSubject<number> {
+    return this.numTeams;
   }
 
   getPokemon(url: string): Observable<Pokemon[]> {

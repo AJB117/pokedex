@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Pokemon } from 'src/app/pokemon/pokemon';
+import { Pokemon } from 'src/app/pokemon/pokemon.model';
 import { PokemonService } from 'src/app/pokemon/pokemon.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -11,6 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AddTeamsComponent implements OnInit {
 
   teamForm: FormGroup;
+  teams: Pokemon[][] = []
 
   constructor(public dialogRef: MatDialogRef<AddTeamsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Pokemon,

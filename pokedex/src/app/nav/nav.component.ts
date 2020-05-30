@@ -9,11 +9,13 @@ import { PokemonService } from '../pokemon/pokemon.service';
 export class NavComponent implements OnInit {
   @Input('title') title: string;
   numCaught: any;
+  numTeams: any;
 
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
     this.numCaught = this.pokemonService.getNumCaught();
+    this.numTeams = this.pokemonService.getNumTeams();
   }
 
 }

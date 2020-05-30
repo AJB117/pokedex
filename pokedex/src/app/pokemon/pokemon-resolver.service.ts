@@ -1,5 +1,5 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Pokemon } from './pokemon';
+import { Pokemon } from './pokemon.model';
 import { combineLatest, throwError } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { PokemonService } from './pokemon.service';

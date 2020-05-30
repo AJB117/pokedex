@@ -39,4 +39,5 @@ nav a {
 
   .toolbar-action {
       cursor: pointer;
+      outline: none;
   }

@@ -1,15 +1,16 @@
-<h1>Add to team</h1>
-<form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+<h1>Create team</h1>
+<form [formGroup]="teamForm" (ngSubmit)="onSubmit()" class="newForm">
     <mat-form-field appearance="fill">
         <mat-label >Name</mat-label>
         <input matInput formControlName="name">
     </mat-form-field>
-    <mat-form-field>
+    <span class="filler"></span>
+    <mat-form-field appearance="fill">
         <mat-label >Description</mat-label>
         <input matInput formControlName="description">
     </mat-form-field>
     <button mat-button 
-        (click)="onSubmit()" 
+        type="submit" 
         class="add"
         [disabled]="!teamForm.valid">Add</button>
 </form>
