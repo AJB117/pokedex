@@ -1,15 +1,33 @@
+
 <h1>Add to team</h1>
-<form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+    
+<div class="flex-container"
+    fxLayout="column"
+    fxLayoutAlign="space-around"
+    fxFlex="100%"
+    fxWrap>
+    <mat-card class="flex-item" fxFlex=10>Card</mat-card>
+    <mat-card class="flex-item" fxFlex=10>Card</mat-card>
+    <mat-card class="flex-item" fxFlex=10>Card</mat-card>
+</div>
+
+<div class="flex-container"
+    fxLayout="row"
+    fxLayoutAlign="space-between"
+    fxFlex="100%">
+    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+        <h1>Create new team</h1>
     <mat-form-field appearance="fill">
         <mat-label >Name</mat-label>
-        <input matInput formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label >Description</mat-label>
-        <input matInput formControlName="description">
-    </mat-form-field>
-    <button mat-button 
-        (click)="onSubmit()" 
-        class="add"
-        [disabled]="!teamForm.valid">Add</button>
-</form>
+            <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label >Description</mat-label>
+            <input matInput formControlName="description">
+        </mat-form-field>
+        <button mat-button 
+            (click)="onSubmit()" 
+            class="add"
+            [disabled]="!teamForm.valid">Add</button>
+    </form>
+</div>

@@ -16,19 +16,41 @@ export class PokemonService {
 
   constructor(
     private http: HttpClient,
-  ) {
-    
+  ) {}
+
+  addToLocalStorage(thing: any, name: string, obj: any): boolean {
+    if (localStorage.getItem(name) === null) {
+      localStorage.setItem(name, JSON.stringify([]));
+    }
+    if (!localStorage.getItem(name).includes(JSON.stringify(thing))) {
+      obj.push(thing);
+      localStorage.setItem(name, JSON.stringify(obj));
+      return true;
+    }
+    return false;
   }
-  
+
   getTeams() {
     return this.teams;
   }
 
-  addTeam(team: Team) {
-    console.log('before: ', this.teams);
-    this.teams.push(team);
-    console.log('after: ', this.teams);
-    this.numTeams.next(this.teams.length);
+  addTeam(team: Team): boolean {
+    // if (localStorage.getItem('teams') === null) {
+    //   localStorage.setItem('teams', JSON.stringify([]));
+    // }
+    // if (!localStorage.getItem('teams').includes(JSON.stringify(team))) {
+    //   this.teams.push(team);
+    //   localStorage.setItem('teams', JSON.stringify(this.teams));
+    //   this.numTeams.next(this.teams.length);
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    if (this.addToLocalStorage(team, 'teams', this.teams)) {
+      this.numTeams.next(this.teams.length);
+      return true;
+    }
+    return false;
   }
 
   getCaught() {
@@ -36,15 +58,11 @@ export class PokemonService {
   }
 
   addCaught(pkmn: Pokemon): boolean {
-    if (localStorage.getItem("caught") === null) {
-      localStorage.setItem("caught", JSON.stringify([]));
-    }
-    if (!localStorage.getItem("caught").includes(JSON.stringify(pkmn))) {
-      this.caught.push(pkmn);
-      localStorage.setItem("caught", JSON.stringify(this.caught));
+    if (this.addToLocalStorage(pkmn, 'caught', this.caught)) {
       this.numCaught.next(this.caught.length);
       return true;
-    } else return false;
+    }
+    return false;
   }
 
   remove(pkmn: Pokemon): void {
@@ -69,7 +87,7 @@ export class PokemonService {
   }
 
   getAllPokemon(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.url, { params: {'limit': '12'}});
+    return this.http.get<Pokemon[]>(this.url, { params: {'limit': '150'}});
   }
 
 }

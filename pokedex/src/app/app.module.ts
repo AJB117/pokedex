@@ -12,6 +12,7 @@ import { PokemonDialogComponent } from './pokemon/pokemon-stats/pokemon-stats.co
 import { TeamsComponent } from './teams/teams.component';
 import { NavComponent } from './nav/nav.component';
 import { AddTeamsComponent } from './teams/add-teams/add-teams.component';
+import { TeamListComponent } from './teams/team-list/team-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokemonService } from './pokemon/pokemon.service';
@@ -27,6 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NewTeamComponent } from './teams/new-team/new-team.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { NewTeamComponent } from './teams/new-team/new-team.component';
     NavComponent,
     TeamsComponent,
     AddTeamsComponent,
-    NewTeamComponent
+    NewTeamComponent,
+    TeamListComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,7 @@ import { NewTeamComponent } from './teams/new-team/new-team.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     ReactiveFormsModule
   ],
   providers: [PokemonService, PokemonResolver],
